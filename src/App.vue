@@ -1,8 +1,8 @@
 <template>
   <div id="div">
-        <keep-alive>
+        <!-- <keep-alive> -->
             <router-view></router-view>
-        </keep-alive>
+        <!-- </keep-alive> -->
     </div>
 </template>
 
@@ -14,11 +14,52 @@ export default {
 </script>
 
 <style>
-*{
-    margin: 0;
-    padding: 0;
-}
-html,body,#div,.jindongBox{
+#div,.jindongBox{
     height: 100%;
 }
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body,
+html {
+  width: 100%;
+  height: 100%;
+  background-color: #f3f3f3;
+}
+a{
+  text-decoration: none;
+}
+.first-slideshow .swiper-pagination-bullet {
+  width: 10px !important;
+  height: 5px !important;
+  border-radius: 5px !important;
+  margin: 0 5px !important;
+}
+.first-slideshow .swiper-pagination-bullet-active {
+  width: 15px !important;
+  height: 5px !important;
+  background-color: white !important;
+}
+.second-slideshow .swiper-pagination-bullet {
+  width: 10px !important;
+  height: 5px !important;
+  border-radius: 5px !important;
+  margin: 0 5px !important;
+}
+.second-slideshow .swiper-pagination-bullet-active {
+  width: 15px !important;
+  height: 5px !important;
+  background-color: orangered !important;
+}
+.detail-slideshow .swiper-pagination-fraction{
+  display: flex;
+  flex-flow: row;
+  position: absolute;
+  bottom: 1rem !important;
+  left: 90% !important;
+  
+}
+
 </style>

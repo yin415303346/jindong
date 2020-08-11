@@ -21,11 +21,7 @@
           </router-link>
       </div>
     </div>
-    <div class="concent">
-
-
-
-    </div>
+      <main-page></main-page> 
     <div class="float">
       <div class="floatImg" @click="check(0)">
         <!-- <img src="../assets/homeq.png" v-if="indexItem==0" /> -->
@@ -52,12 +48,16 @@
 </template>
 
 <script>
+import MainPage from "./MainPage.vue"
 export default {
   data() {
     return {
       indexItem: 0,
       componentName: "home-page",
     };
+  },
+  components:{
+    "main-page":MainPage
   },
   methods: {
     // intoClassify() {
@@ -107,6 +107,9 @@ body,html{
 }
 .top{
   width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 999;
 }
 .jindongBox {
   display: flex;
@@ -116,9 +119,13 @@ body,html{
   height: 100%;
 }
 .float {
+  position: fixed;
+  bottom: 0;
+  z-index: 999;
   background: #fff;
   /* padding: 2px 15px; */
   flex-shrink: 0;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   text-align: center;
