@@ -54,7 +54,7 @@ export default {
 
   created() {
     let that = this;
-    let url = "http://127.0.0.1:5500/dist/data/panel1.json";
+    let url = "http://127.0.0.1:5500/src/data/panel1.json";
     axios
       .get(url)
       .then(function (response) {
@@ -80,7 +80,7 @@ export default {
       });
 
     //获取默认的分类数据
-    let url2 = "http://127.0.0.1:5500/dist/data/list.json";
+    let url2 = "http://127.0.0.1:5500/src/data/list.json";
     axios
       .get(url2)
       .then(function (response) {
@@ -97,7 +97,7 @@ export default {
     getpanel(item,id) {
       this.cls = id;
       let that = this;
-      let url = "http://127.0.0.1:5500/dist/data/panel" + id + ".json";
+      let url = "http://127.0.0.1:5500/src/data/panel" + id + ".json";
       axios
         .get(url)
         .then(function (response) {
