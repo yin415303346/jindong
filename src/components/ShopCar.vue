@@ -95,84 +95,6 @@
                             </div>
                         </div>
                     </li>
-                    <li class="ad_li">
-                        <div class="cover">
-                            <img :src="item.goodsimg" >
-                        </div>
-                        <div class="info">
-                            <div class="rec_name">
-                                <i class="mod_tag">
-                                    <img :src="item.jdimg">
-                                </i>
-                                <span>{{item.desc}}</span>
-                            </div>
-                            <div class="flex_wrap">
-                                <div class="flex_wrap">
-                                    <div class="price_info">
-                                        <div class="price">
-                                            <span class="">{{item.price}}</span>
-                                            <em>{{item.pricenum}}</em>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="buy rec_cart">
-                                    <img :src="item.cartimg">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="ad_li">
-                        <div class="cover">
-                            <img :src="item.goodsimg" >
-                        </div>
-                        <div class="info">
-                            <div class="rec_name">
-                                <i class="mod_tag">
-                                    <img :src="item.jdimg">
-                                </i>
-                                <span>{{item.desc}}</span>
-                            </div>
-                            <div class="flex_wrap">
-                                <div class="flex_wrap">
-                                    <div class="price_info">
-                                        <div class="price">
-                                            <span class="">{{item.price}}</span>
-                                            <em>{{item.pricenum}}</em>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="buy rec_cart">
-                                    <img :src="item.cartimg">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="ad_li">
-                        <div class="cover">
-                            <img :src="item.goodsimg" >
-                        </div>
-                        <div class="info">
-                            <div class="rec_name">
-                                <i class="mod_tag">
-                                    <img :src="item.jdimg">
-                                </i>
-                                <span>{{item.desc}}</span>
-                            </div>
-                            <div class="flex_wrap">
-                                <div class="flex_wrap">
-                                    <div class="price_info">
-                                        <div class="price">
-                                            <span class="">{{item.price}}</span>
-                                            <em>{{item.pricenum}}</em>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="buy rec_cart">
-                                    <img :src="item.cartimg">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -208,7 +130,7 @@ export default {
 
   created() {
     let that = this;
-    let url = "http://127.0.0.1:5500/dist/data/cart.json";
+    let url = "http://127.0.0.1:5500/src/data/cart.json";
     axios
       .get(url)
       .then(function (response) {
@@ -614,5 +536,9 @@ img {
     color: #e93b3d;
     margin-right: 3px;
     line-height: 20px;
+}
+
+.list{
+    list-style: none;
 }
 </style>
