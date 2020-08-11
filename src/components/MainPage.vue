@@ -485,7 +485,7 @@ export default {
     };
   },
   created() {
-    let url = "http://127.0.0.1:5500/jindong/data/goodlist.json";
+    let url = "http://127.0.0.1:5500/data/goodlist.json";
     let that = this;
     axios
       .get(url)
@@ -551,6 +551,7 @@ export default {
   align-items: center;
   justify-content: center;
   margin-top: 2rem;
+  background-color: #f3f3f3;
 }
 .main::-webkit-scrollbar {
   display: none;

@@ -13,44 +13,57 @@
       </div>
     </div>
     <div class="good-black-nav" :class="{activeBlack:blacknav==true}">
-      <div class="good-black-nav-detail">
-        <span class="good-black-nav-detail-span1">
-          <img src="../assets/房屋管理.png" alt />
-        </span>
-        <span class="good-black-nav-detail-span2">首页</span>
-      </div>
+      <router-link to='/' style="color:white">
+        <div class="good-black-nav-detail">
+          <span class="good-black-nav-detail-span1">
+            <img src="../assets/房屋管理.png" alt />
+          </span>
+          <span class="good-black-nav-detail-span2">首页</span>
+        </div>
+      </router-link>
+      <router-link to='/classify' style="color:white">
       <div class="good-black-nav-detail">
         <span class="good-black-nav-detail-span1">
           <img src="../assets/搜索.png" alt />
         </span>
         <span class="good-black-nav-detail-span2">分类搜索</span>
       </div>
+      </router-link>
+      <router-link to='/mine' style="color:white">
       <div class="good-black-nav-detail">
         <span class="good-black-nav-detail-span1">
           <img src="../assets/我.png" alt />
         </span>
         <span class="good-black-nav-detail-span2">我的京东</span>
       </div>
+      </router-link>
+      <router-link to='/' style="color:white">
       <div class="good-black-nav-detail">
         <span class="good-black-nav-detail-span1">
           <img src="../assets/足迹.png" alt />
         </span>
         <span class="good-black-nav-detail-span2">浏览记录</span>
       </div>
+      </router-link>
+      <router-link to='/' style="color:white">
       <div class="good-black-nav-detail">
         <span class="good-black-nav-detail-span1">
           <img src="../assets/心 爱心.png" alt />
         </span>
         <span class="good-black-nav-detail-span2">我的关注</span>
       </div>
+      </router-link>
+      <router-link to='/' style="color:white">
       <div class="good-black-nav-detail">
         <span class="good-black-nav-detail-span1">
           <img src="../assets/分享.png" alt />
         </span>
         <span class="good-black-nav-detail-span3">分享</span>
       </div>
+      </router-link>
       <div class="good-black-nav-css"></div>
     </div>
+    
 
     <div class="detail-slideshow" v-if="goods">
       <swiper ref="mySwiper" :options="swiperOptions">
@@ -193,7 +206,28 @@
     <div ref="Tag2">
       <componentB></componentB>
     </div>
-    <div class="box5" ref="Tag3">推荐详情</div>
+    <div ref="Tag3">
+       <componentC></componentC>
+    </div>
+     <div class="good-bottom" @click="goTop()"  >
+      <img src="../assets/返回顶部 1.png" alt="" v-if="showgo">
+    </div>
+    <div class="bottom-foot">
+      <div class="foot1">
+        <img src="../assets/详情页客服 .png" alt="">
+        客服
+      </div>
+       <div class="foot1">
+        <img src="../assets/店铺.png" alt="">
+        店铺
+      </div>
+       <div class="foot1">
+        <img src="../assets/购物车.png" alt="">
+        购物车
+      </div>
+      <div class="foot2">加入购物车</div>
+      <div class="foot3">立即购买</div>
+    </div>
   </div>
 </template>
 
@@ -201,6 +235,7 @@
 import axios from "axios";
 import Evaluate from "./Evaluate.vue";
 import Likes from "./Likes.vue";
+import Products from './Products.vue'
 export default {
   data() {
     return {
@@ -215,6 +250,7 @@ export default {
         },
         loop: true,
       },
+      showgo:false,
       goods: [],
       goodNav: "good1",
       title: false,
@@ -224,11 +260,12 @@ export default {
   },
   components:{
     "componentA":Evaluate,
-    "componentB":Likes
+    "componentB":Likes,
+    "componentC":Products
   },
   created() {
     let url =
-      "http://127.0.0.1:5500/jindong/data/goodlist.json?id=" +
+      "http://127.0.0.1:5500/data/goodlist.json?id=" +
       this.$route.query.id;
     let that = this;
     let id = this.$route.query.id;
@@ -253,8 +290,10 @@ export default {
       let scrTop = document.documentElement.scrollTop;
       if (scrTop > 0) {
         that.title = true;
+        that.showgo=true
       } else {
         that.title = false;
+        that.showgo=false
       }
       that.blacknav = false;
     };
@@ -273,6 +312,10 @@ export default {
       }
       this.animate();
     },
+    goTop(){
+      document.documentElement.scrollTop = 0
+    },
+
     animate() {
       let that = this;
       clearInterval(this.timer);
@@ -299,6 +342,7 @@ export default {
     goback() {
       this.$router.go(-1);
     },
+    
   },
 };
 </script>
@@ -310,6 +354,7 @@ export default {
   flex-flow: column;
   justify-content: center;
   width: 100%;
+  background-color: #f3f3f3;
 }
 .detail-slideshow {
   height: 400px;
@@ -621,6 +666,46 @@ export default {
 .discounts1 {
   margin-top: 0;
   border-radius: 0;
+}
+.good-bottom{
+  position: fixed;
+  bottom: 10%;
+  right: 5%;
+  z-index: 9999;
+}
+.bottom-foot{
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  flex-flow: row;
+  width: 100%;
+  align-items: center;
+  z-index: 99999;
+  background-color: white;
+}
+.foot1{
+  display: flex;
+  flex-flow: column;
+  /* justify-content: center; */
+  align-items: center;
+  font-size: .8rem;
+  width: 15%;
+}
+.foot1 img{
+  width: 1.5rem;
+}
+.foot2{
+  background-color: red;
+  padding: .5rem 1rem;
+  color: white;
+  border-radius: 1rem;
+  margin-right: .5rem;
+}
+.foot3{
+  background-color: rgb(255, 190, 13);
+  padding: .5rem 1rem;
+  color: white;
+  border-radius: 1rem;
 }
 
 

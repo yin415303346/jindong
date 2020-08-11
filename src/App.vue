@@ -59,7 +59,12 @@ a{
   position: absolute;
   bottom: 1rem !important;
   left: 90% !important;
-  
 }
+.box2-like .swiper-pagination-bullet{
+  width: 15px;
+  height: 5px;
+  border-radius: 3px;
+}
+
 
 </style>
