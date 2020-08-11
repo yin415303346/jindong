@@ -167,11 +167,10 @@ export default {
 
 <style scoped>
 .pagecart{
-    width: 100%;
+     width: 100%;
     height: 100%;
     overflow-y: scroll;
     overflow: hidden scroll;
-    background-color: rbg(242,242,242)
 }
 
 .carttop {
@@ -389,6 +388,7 @@ export default {
     color: #fff;
     font-size: 14px;
     line-height: 30px;
+    background-image: -webkit-gradient(linear,right top,left top,from(#f2270c),to(#ff9574));
     background-image: -webkit-linear-gradient(right,#f2270c,#ff9574);
     background-image: linear-gradient(-90deg,#f2270c,#ff9574);
     box-shadow: 0 5px 10px 0 rgba(233,59,61,.2);
