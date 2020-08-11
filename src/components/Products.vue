@@ -18,9 +18,9 @@
     </div>
 </template>
 <script>
-import DetailName1 from './DetailName1'
-import DetailName2 from './DetailName2'
-import DetailName3 from './DetailName3'
+import DetailName1 from './DetailName1.vue'
+import DetailName2 from './DetailName2.vue'
+import DetailName3 from './DetailName3.vue'
 export default {
     data(){
         return {
