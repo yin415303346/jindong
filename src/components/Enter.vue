@@ -1,20 +1,21 @@
 <template>
     <div class="enter-box">
         <div class="enter-top">
-            <div class="enter-top-left" @click="$router.go(-1)">
+            <div class="enter-top-left" @click="toNext">
                 <img src="../assets/left.png" alt="">
             </div>
             <div class="enter-top-mid">京东登录注册</div>
             <div class="enter-top-left"></div>
         </div>
         <div class="enter-username">
-            <input type="text" placeholder="用户名/邮箱/手机号" v-model="usernameMsg" @click="Show(1)">
-            <i class="enter-username-icon" v-if="isShow"></i>
+            <input type="text" placeholder="用户名/邮箱/手机号" v-model="usernameMsg" @keyup.enter="enter">
+            <i class="enter-username-icon" v-if="isShow" @click="delNum"></i>
         </div>
         <div class="enter-username">
-            <input type="password" v-model="msg" placeholder="请输入密码" v-if="eyestate">
-            <input type="text" v-model="msg" placeholder="请输入密码" v-else>
-            <span class="enter-username-eye" @click="eye()">
+            <input type="password" v-model="msg" placeholder="请输入密码" v-if="eyestate" @keyup.enter="enter">
+            <input type="text" v-model="msg" placeholder="请输入密码" v-else @keyup.enter="enter">
+            <i class="enter-username-icon qwd-icon" v-if="isShow2" @click="delNum2"></i>
+            <span class="enter-username-eye" @click="eye">
                 <img src="../assets/close.png" alt="" v-if="eyestate">
                 <img src="../assets/open.png" alt="" v-else>
             </span>
@@ -66,7 +67,8 @@ export default {
             isOther:false,
             valueNum:false,
             valueNumber:false,
-            isShow:false
+            isShow:false,
+            isShow2:false
         }
     },
     methods:{
@@ -89,12 +91,24 @@ export default {
             }else{
                 this.isShow=false
             }
+        },
+        delNum(){
+            this.usernameMsg = ''
+        },
+        delNum2(){
+            this.msg = ''
+        },
+        toNext(){
+            this.$router.go(-1)
+            this.usernameMsg = ''
+            this.msg = ''
         }
     },
     watch:{
         msg(value){
            if(value){
                this.valueNum = true;
+               this.isShow2=true
            }
            if(this.valueNum == true && this.valueNumber == true){
                this.isOther = true
@@ -102,11 +116,13 @@ export default {
            if(value.length == 0){
                this.valueNum = false;
                this.isOther = false
+               this.isShow2=false
            }
         },
         usernameMsg(value){
            if(value){
                this.valueNumber = true;
+               this.isShow=true
            }
            if(this.valueNum == true && this.valueNumber == true){
                this.isOther = true
@@ -114,6 +130,7 @@ export default {
            if(value.length == 0){
                this.valueNumber = false;
                this.isOther = false
+               this.isShow=false
            }
         }
     }
@@ -277,5 +294,8 @@ export default {
     right: 0;
     top: 0;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAHlBMVEUAAADMzMzNzc3Nzc3Nzc3MzMzMzMzPz8/Ozs7Nzc2Z5bCdAAAACnRSTlMA/lXB0M9LSiopP4KJtgAAAH5JREFUOMtjGAWkgslhMFapBYqEoaAChMEkKIwiESgoBGEoCoqgSBQKCipANAiKwQWhAkJgDSAFcAATgcljaIFJY2qByGLRAtWAqQWqAVMLVAOmFoQGwhIIowhZTti5CA8SDBLMQCQu2BNxRZQjWtQSTgyTw2GsEguGUUAiAAAoUA/JvBWTsAAAAABJRU5ErkJggg==);
+}
+.qwd-icon{
+    right: 142px;
 }
 </style>

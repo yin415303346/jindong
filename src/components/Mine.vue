@@ -787,4 +787,9 @@ export default {
 .shopfloot{
     margin-bottom: 58px;
 }
+.my-concent-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 </style>
