@@ -8,7 +8,8 @@
             <div class="enter-top-left"></div>
         </div>
         <div class="enter-username">
-            <input type="text" placeholder="用户名/邮箱/手机号" v-model="usernameMsg">
+            <input type="text" placeholder="用户名/邮箱/手机号" v-model="usernameMsg" @click="Show(1)">
+            <i class="enter-username-icon" v-if="isShow"></i>
         </div>
         <div class="enter-username">
             <input type="password" v-model="msg" placeholder="请输入密码" v-if="eyestate">
@@ -64,7 +65,8 @@ export default {
             isActive:true,
             isOther:false,
             valueNum:false,
-            valueNumber:false
+            valueNumber:false,
+            isShow:false
         }
     },
     methods:{
@@ -78,6 +80,14 @@ export default {
                 });
             }else{
                 alert("用户名或密码有误")
+            }
+        },
+        Show(n){
+            // console.log(n)
+            if(n==1){
+                this.isShow=true
+            }else{
+                this.isShow=false
             }
         }
     },
@@ -143,6 +153,7 @@ export default {
     flex-direction: row;
     margin-bottom: 25px;
     align-items: center;
+    position: relative;
 }
 .enter-username input{
     width: 100%;
@@ -254,5 +265,17 @@ export default {
 .enter-agree a{
     color: #4a90e2;
     text-decoration: none;
+}
+
+.enter-username-icon{
+    position: absolute;
+    width: 20px;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: 0;
+    right: 0;
+    top: 0;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAHlBMVEUAAADMzMzNzc3Nzc3Nzc3MzMzMzMzPz8/Ozs7Nzc2Z5bCdAAAACnRSTlMA/lXB0M9LSiopP4KJtgAAAH5JREFUOMtjGAWkgslhMFapBYqEoaAChMEkKIwiESgoBGEoCoqgSBQKCipANAiKwQWhAkJgDSAFcAATgcljaIFJY2qByGLRAtWAqQWqAVMLVAOmFoQGwhIIowhZTti5CA8SDBLMQCQu2BNxRZQjWtQSTgyTw2GsEguGUUAiAAAoUA/JvBWTsAAAAABJRU5ErkJggg==);
 }
 </style>
