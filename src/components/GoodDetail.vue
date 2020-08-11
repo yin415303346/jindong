@@ -228,7 +228,7 @@ export default {
   },
   created() {
     let url =
-      "http://127.0.0.1:5500/jindong/data/goodlist.json?id=" +
+      "http://127.0.0.1:5500/data/goodlist.json?id=" +
       this.$route.query.id;
     let that = this;
     let id = this.$route.query.id;
