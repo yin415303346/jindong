@@ -6,6 +6,7 @@ import Search from "../components/Search.vue"
 import Classify from "../components/Classify.vue"
 import ShopCar from "../components/ShopCar.vue"
 import Mine from "../components/Mine.vue"
+import GoodDetail from "../components/GoodDetail.vue"
 
 Vue.use(VueRouter)
 var routes = [
@@ -29,9 +30,15 @@ var routes = [
         path:"/shop-car",
         component:ShopCar
     },
+   
     {
         path:"/mine",
         component:Mine
+    },
+    
+    {
+        path:"/:id",
+        component:GoodDetail
     },
 ]
 var router = new VueRouter({
