@@ -382,7 +382,7 @@
         <p>电脑版</p>
       </div>
     </div>
-    <p style="color:#8e8e8e">Copyright@ 2004-2019 京东JD.com版权所有</p>
+    <p class="main-bottom-app-floot">Copyright@ 2004-2019 京东JD.com版权所有</p>
     <div class="main-bottom-return"  @click="gotop" >
       <img src="../assets/返回顶部 1.png" alt="" v-if="showgo">
     </div>
@@ -485,7 +485,7 @@ export default {
     };
   },
   created() {
-    let url = "http://127.0.0.1:5500/data/goodlist.json";
+    let url = "http://127.0.0.1:5500/src/data/goodlist.json";
     let that = this;
     axios
       .get(url)
@@ -855,6 +855,13 @@ export default {
   background-color: white;
   width: 100%;
   border-top: 1px solid #d8caca;
+  border-bottom: 1px solid rgb(235,235,235);
+}
+.main-bottom-app-floot{
+  color:#8e8e8e; 
+  margin-bottom:58px;
+  font-size: 12px;
+ 
 }
 .main-bottom-app div{
   padding-top: .5rem;
@@ -865,7 +872,7 @@ export default {
   padding-bottom: .5rem;
 }
 .main-bottom-return{
-
+  
   position: fixed;
   bottom: 5rem;
   right: .5rem;

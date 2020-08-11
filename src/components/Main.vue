@@ -49,6 +49,7 @@
 
 <script>
 import MainPage from "./MainPage.vue"
+
 export default {
   data() {
     return {
@@ -97,6 +98,7 @@ export default {
 };
 </script>
 <style>
+
 * {
   padding: 0;
   margin: 0;

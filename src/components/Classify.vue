@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="concent">
-
+      <list></list>
 
 
     </div>
@@ -51,8 +51,11 @@
 </template>
 
 <script>
+import List from "../views/list.vue"
 export default {
- 
+  components:{
+    "list":List
+  }
 };
 </script>
 

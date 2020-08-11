@@ -1,8 +1,8 @@
 <template>
   <div id="div">
-        <!-- <keep-alive> -->
+        <keep-alive>
             <router-view></router-view>
-        <!-- </keep-alive> -->
+        </keep-alive>
     </div>
 </template>
 
@@ -26,7 +26,6 @@ body,
 html {
   width: 100%;
   height: 100%;
-  background-color: #f3f3f3;
 }
 a{
   text-decoration: none;

@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
+    "cube-ui": "^1.12.43",
     "swiper": "^6.1.1",
     "vue": "^2.6.11",
     "vue-awesome-swiper": "^4.1.1",
@@ -45,5 +46,11 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "transformModules": {
+    "cube-ui": {
+      "transform": "cube-ui/src/modules/${member}",
+      "kebabCase": true
+    }
+  }
 }
