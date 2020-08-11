@@ -1,7 +1,7 @@
 <template>
   <div class="panelsbox">
     <!--左边选项列表-->
-    <cube-scroll class="leftpanels" >
+    <div class="leftpanels" >
       <!--ref="scroll" :data="items" :options="options" -->
       <ul class="box1" >
         <li
@@ -12,10 +12,10 @@
           
         >{{item.label}}</li>
       </ul>
-    </cube-scroll>
+    </div>
     <!--右边商品列表 -->
     
-      <cube-scroll class="rightpanels" >
+      <div class="rightpanels" >
         <ul class="box2">
           <component :is="panellist" :content="content"></component>
           <recommend></recommend>
@@ -24,7 +24,7 @@
                         <p>{{tag.label}}</p>
           </li>-->
         </ul>
-      </cube-scroll>
+      </div>
   </div>
 </template>
 
