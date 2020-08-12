@@ -386,6 +386,7 @@
     <div class="main-bottom-return"  @click="gotop" >
       <img src="../assets/返回顶部 1.png" alt="" v-if="showgo">
     </div>
+    <div class="show-background"></div>
   </div>
 </template>
 
@@ -433,7 +434,7 @@ export default {
         },
         {
           id: 3,
-          src: require("../assets/list3.png"),
+          src: require("../assets/list1.jpg"),
           price1: 25.5,
           price2: 32,
         },
@@ -542,6 +543,15 @@ export default {
 };
 </script>
 <style scoped>
+.show-background{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 150px;
+  background-color: red;
+  border-bottom-left-radius: 1rem;
+   border-bottom-right-radius: 1rem;
+}
 .main {
   display: flex;
   flex-direction: column;
@@ -627,10 +637,10 @@ export default {
   flex-flow: row;
   justify-content: space-between;
   background-color: white;
-  padding: 0.5rem;
+  padding: 0.2rem;
   background-image: url("../assets/xrbj2.png");
   background-size: 100%;
-  font-size: 1rem;
+  font-size: .8rem;
 }
 .main-count-down {
   display: flex;
@@ -740,21 +750,21 @@ export default {
   color: #999;
 }
 .sub-main-nav-midlle-first-child-p3 {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 900;
   padding-left: 0.5rem;
   padding-top: 0.5rem;
   color: rgb(24, 22, 23);
 }
 .sub-main-nav-midlle-first-child-p4 {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 900;
   padding-left: 0.5rem;
   padding-top: 0.5rem;
   color: rgb(216, 27, 121);
 }
 .sub-main-nav-midlle-first-child-p5 {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 900;
   padding-left: 0.5rem;
   padding-top: 0.5rem;

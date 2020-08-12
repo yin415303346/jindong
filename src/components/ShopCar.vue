@@ -42,7 +42,6 @@
                         <div class="oprice"></div>
                     </div>
                 </div>
-
                 <div class="empty_cart_coupon">
                     <div class="mod_coupon_head">
                         <div class="mod_coupon_title">

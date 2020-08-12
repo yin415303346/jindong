@@ -141,11 +141,12 @@ body,html{
   flex-direction: row;
   justify-content: space-between;
   padding: 2px 12px;
-  background: url("../assets/back.jpg");
+  /* background: url("../assets/back.jpg"); */
   height: 40px;
   align-items: center;
   color: #fff;
   font-size: 14px;
+  background-color: red;
   /* width: 100%; */
 }
 .top-title-box {

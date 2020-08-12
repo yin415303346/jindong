@@ -97,7 +97,6 @@ export default {
 <style scoped>
 #evaluate {
   background-color: white;
-  margin-top: 1rem;
   border-radius: 1rem;
   width: 100%;
 }
