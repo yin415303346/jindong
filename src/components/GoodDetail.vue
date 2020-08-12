@@ -222,10 +222,12 @@
         店铺
       </div>
        <div class="foot1">
-        <img src="../assets/购物车.png" alt="">
-        购物车
+          <img src="../assets/购物车.png" alt="">
+          <router-link to="/shop-car">
+            购物车
+          </router-link>
       </div>
-      <div class="foot2">加入购物车</div>
+      <div class="foot2" @click="addList(goods)">加入购物车</div>
       <div class="foot3">立即购买</div>
     </div>
   </div>
@@ -283,9 +285,9 @@ export default {
   },
   mounted() {
     let that = this;
-    console.log(that.$refs.Tag1.offsetTop);
-    console.log(that.$refs.Tag2.offsetTop);
-    console.log(that.$refs.Tag3.offsetTop);
+    // console.log(that.$refs.Tag1.offsetTop);
+    // console.log(that.$refs.Tag2.offsetTop);
+    // console.log(that.$refs.Tag3.offsetTop);
     window.onscroll = function () {
       let scrTop = document.documentElement.scrollTop;
       if (scrTop > 0) {
@@ -315,7 +317,10 @@ export default {
     goTop(){
       document.documentElement.scrollTop = 0
     },
-
+    addList(goods){
+      // console.log(goods)
+      this.$store.commit("add",goods)
+    },
     animate() {
       let that = this;
       clearInterval(this.timer);
