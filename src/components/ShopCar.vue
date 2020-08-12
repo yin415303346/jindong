@@ -251,7 +251,6 @@ export default {
         handLiChange(){
             if(this.checkGroup.length == this.list.length){
                 this.isAllchecked = true;
-                console.log(this.checkGroup)
                 // console.log(this.list)
             }else{
                 this.isAllchecked = false
@@ -263,6 +262,7 @@ export default {
         // console.log(index)
         if(this.checkGroup.length==0){
             this.$store.state.isDispaly=true 
+             this.checkGroup = [];
             this.$store.state.isAble=false 
         }
     }
