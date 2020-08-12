@@ -1,7 +1,7 @@
 <template>
   <div class="jindongBox">
     <div class="top">
-      <div class="top-title" v-if="indexItem==0">
+      <div class="top-title" v-if="indexItem==0" >
         <div class="top-title-box">
           <img src="../assets/muen.png" class="top-title-img" />
         </div>
@@ -55,7 +55,9 @@ export default {
     return {
       indexItem: 0,
       componentName: "home-page",
+      toptitle:'back'
     };
+    
   },
   components:{
     "main-page":MainPage
