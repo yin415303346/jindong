@@ -1,6 +1,30 @@
 <template>
   <div class="jindongBox">
     <div class="top">
+      <!-- 广告开始 -->
+      <div id="m_common_tip"   v-if="exist"  >
+        <div id="box1">
+          <div class="wrap1">
+            <img src="../assets/g-top.png" alt=""  @click="del"  class="closepic">
+          </div>
+        </div>
+        <div id="box2">
+          <div class="wrap2">
+            <img src="../assets/g-top1.png" alt="" class="brandpic">
+          </div>
+        </div>
+        <div id="box3">
+          <div class="wrap3">
+            <span>打开京东App,购物更轻松</span>
+          </div>
+        </div>
+        <div id="box4">
+          <div class="wrap4">
+            <span class="wrap5">立即打开</span>
+          </div>
+        </div>
+      </div>
+      <!-- 广告结束 -->
       <div class="top-title" v-if="indexItem==0">
         <div class="top-title-box">
           <img src="../assets/muen.png" class="top-title-img" />
@@ -16,20 +40,20 @@
             <input type="text" class="top-title-input" placeholder="欧普照明" />
           </div>
         </div>
-          <router-link to="/enter">
-            <div class="top-enter">登录</div>
-          </router-link>
+        <router-link to="/enter">
+          <div class="top-enter">登录</div>
+        </router-link>
       </div>
     </div>
-      <main-page></main-page> 
+    <main-page></main-page>
     <div class="float">
       <div class="floatImg" @click="check(0)">
         <!-- <img src="../assets/homeq.png" v-if="indexItem==0" /> -->
-        <img src="../assets/homeq.png"/>
+        <img src="../assets/homeq.png" />
       </div>
       <div class="floatImg" @click="check(1)">
         <!-- <img src="../assets/classfiyq.png" v-if="indexItem==1" /> -->
-        <img src="../assets/classfiy.png"/>
+        <img src="../assets/classfiy.png" />
       </div>
       <div class="floatImg">
         <a href="https://wq.jd.com/mcoss/wxmall/home?ptype=2&ptag=138097.1.6&sceneval=2&fromM=1">
@@ -38,7 +62,7 @@
       </div>
       <div class="floatImg" @click="check(3)">
         <!-- <img src="../assets/shopcarq.png" v-if="indexItem==3" /> -->
-        <img src="../assets/shopcar.png"/>
+        <img src="../assets/shopcar.png" />
       </div>
       <div class="floatImg" @click="check(4)">
         <img src="../assets/enter.png" />
@@ -48,17 +72,20 @@
 </template>
 
 <script>
-import MainPage from "./MainPage.vue"
+import MainPage from "./MainPage.vue";
 
 export default {
   data() {
     return {
       indexItem: 0,
       componentName: "home-page",
+      
+      exist:true
+
     };
   },
-  components:{
-    "main-page":MainPage
+  components: {
+    "main-page": MainPage,
   },
   methods: {
     // intoClassify() {
@@ -75,15 +102,12 @@ export default {
       });
     },
     check(index) {
-      
       if (index == 1) {
-       
-         this.$router.push({
+        this.$router.push({
           path: "classify",
         });
       }
       if (index == 3) {
-       
         this.$router.push({
           path: "shop-car",
         });
@@ -94,20 +118,30 @@ export default {
         });
       }
     },
-  }
+
+
+    del(){
+      if(this.exist){
+        this.exist = false
+      }else{
+        this.exist=true
+      }
+    },
+
+    }
 };
 </script>
 <style>
-
 * {
   padding: 0;
   margin: 0;
 }
-body,html{
+body,
+html {
   width: 100%;
   height: 100%;
 }
-.top{
+.top {
   width: 100%;
   position: fixed;
   top: 0;
@@ -225,6 +259,9 @@ body,html{
 .search-box {
   padding: 7px;
   background: #fff;
+  position: fixed;
+  width: 100%;
+  z-index: 2;
 }
 .search-top {
   display: flex;
@@ -290,9 +327,90 @@ body,html{
   background: rgb(246, 246, 246);
   font-size: 12px;
   padding: 4px 12px;
-  line-height: 35px; 
+  line-height: 35px;
   white-space: nowrap;
   text-overflow: ellipsis;
   border-radius: 4px;
 }
+
+/* 头部广告样式开始 */
+
+.nacActive{
+  display: none;
+}
+
+#m_common_tip{
+  display: flex;
+  flex-direction: row;
+  width:100%;
+  height:45px;
+  background-color:rgb(51, 51, 51);
+  /* display: none; */
+}
+
+#box1{
+  width:15%;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+
+.wrap1{
+  margin-left: 10px;
+}
+
+.closepic{
+  width: 12px;
+  height: 12px;
+}
+
+#box2{
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  width:15%;
+}
+
+.wrap2{
+  margin-top: 7px;
+  margin-left: -15px;
+}
+
+.brandpic{
+  width: 30px;
+  height:30px;
+}
+
+#box3{
+  flex-grow: 1;
+  width:47%;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  font-size: 15px;
+  color:#fff;
+}
+
+.wrap3{
+  margin-left: -20px;
+}
+
+#box4{
+  width: 23%;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  font-size: 15px;
+  color:#fff;
+  background-color: rgb(212, 34, 34);
+  
+}
+
+.wrap4{
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  margin-left: 15px;
+}
+/* 头部广告样式结束 */
 </style>
