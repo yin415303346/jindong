@@ -4,10 +4,11 @@
     "list": [
         {
             "id": "0",
-            "src": "http://127.0.0.1:5500/src/assets/xg1.webp",
+            "src": "http://localhost:5500/src/assets/xg1.webp",
             "introduce": "米乔人体工程学腰垫 汽车腰靠办公室靠垫夏季减压车座腰枕座椅 经典版-米色",
             "newprice": "179",
             "oldprice": "208",
+            "num":0,
             "srcdetail1": "http://127.0.0.1:5500/src/assets/d1.webp",
             "srcdetail2": "http://127.0.0.1:5500/src/assets/d2.webp",
             "srcdetail3": "http://127.0.0.1:5500/src/assets/d3.webp",
@@ -31,6 +32,7 @@
             "src": "http://127.0.0.1:5500/src/assets/xg2.webp",
             "introduce": " 汽车腰靠办公室靠垫夏季减压车座腰枕座椅 米乔人体工程学腰垫 经典版-米色",
             "newprice": "399",
+            "num":1,
             "oldprice": "208",
             "srcdetail1": "http://127.0.0.1:5500/src/assets/xr1.webp",
             "srcdetail2": "http://127.0.0.1:5500/src/assets/xr2.webp",
@@ -44,6 +46,7 @@
             "src": "http://localhost:5500/src/assets/xg3.webp",
             "introduce": "米乔人体工程学腰垫 汽车腰靠办公室靠垫夏季减压车座腰枕座椅经典版米色",
             "newprice": "178",
+            "num":1,
             "oldprice": "208",
             "srcdetail1": "http://127.0.0.1:5500/src/assets/xr1.webp",
             "srcdetail2": "http://127.0.0.1:5500/src/assets/xr2.webp",

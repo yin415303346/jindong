@@ -1,10 +1,12 @@
 <template>
   <div class="jindongBox">
     <div class="top">
-      <div class="top-title" v-if="indexItem==0" >
-        <div class="top-title-box">
-          <img src="../assets/muen.png" class="top-title-img" />
-        </div>
+      <div class="top-title" v-if="indexItem==0">
+          <div class="top-title-box">
+            <router-link to="/classify">
+              <img src="../assets/muen.png" class="top-title-img" />
+            </router-link>  
+          </div>
         <div class="top-title-inputbox">
           <div class="top-inputbox">
             <img src="../assets/jdlogo.png" alt />

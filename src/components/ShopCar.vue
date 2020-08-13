@@ -1,72 +1,46 @@
 <template>
   <div class="pagecart">
-    <div class="shop-back">
-      <div @click="goback">
-        <img src="../assets/左标.png" />
-      </div>
-      <div class="shop-back-div">购物车</div>
-      <div @click="blackclick">
-        <img src="../assets/更多.png" />
-      </div>
-    </div>
-    <div class="good-black-nav" :class="{activeBlack:blacknav==true}">
-      <router-link to="/" style="color:white">
-        <div class="good-black-nav-detail">
-          <span class="good-black-nav-detail-span1">
-            <img src="../assets/房屋管理.png" alt />
-          </span>
-          <span class="good-black-nav-detail-span2">首页</span>
-        </div>
-      </router-link>
-      <router-link to="/classify" style="color:white">
-        <div class="good-black-nav-detail">
-          <span class="good-black-nav-detail-span1">
-            <img src="../assets/搜索.png" alt />
-          </span>
-          <span class="good-black-nav-detail-span2">分类搜索</span>
-        </div>
-      </router-link>
-      <router-link to="/mine" style="color:white">
-        <div class="good-black-nav-detail">
-          <span class="good-black-nav-detail-span1">
-            <img src="../assets/我.png" alt />
-          </span>
-          <span class="good-black-nav-detail-span2">我的京东</span>
-        </div>
-      </router-link>
-      <router-link to="/" style="color:white">
-        <div class="good-black-nav-detail">
-          <span class="good-black-nav-detail-span1">
-            <img src="../assets/足迹.png" alt />
-          </span>
-          <span class="good-black-nav-detail-span2">浏览记录</span>
-        </div>
-      </router-link>
-      <router-link to="/" style="color:white">
-        <div class="good-black-nav-detail">
-          <span class="good-black-nav-detail-span1">
-            <img src="../assets/心 爱心.png" alt />
-          </span>
-          <span class="good-black-nav-detail-span2">我的关注</span>
-        </div>
-      </router-link>
-      <router-link to="/" style="color:white">
-        <div class="good-black-nav-detail">
-          <span class="good-black-nav-detail-span1">
-            <img src="../assets/分享.png" alt />
-          </span>
-          <span class="good-black-nav-detail-span3">分享</span>
-        </div>
-      </router-link>
-      <div class="good-black-nav-css"></div>
-    </div>
-    <router-link to='/enter'>
-    <div class="carttop" :class="{carttop1:carttop==true}" @click="gocart()">
+    <div class="carttop" v-if="isDispaly">
       <div class="topbar">{{topcontent}}</div>
       <button class="btntop">{{register}}</button>
     </div>
-    </router-link>
-    <div class="empty_cart">
+    <div class="shop-list-box">
+      <div class="shop-list" v-for="(item,index) in list" :key="item.id">
+        <input type="checkbox" class="shop-list-input" v-model="checkGroup" :value="item" @change="handLiChange" checked/>
+        <div class="shop-list-img">
+          <img :src="item.img" alt />
+        </div>
+        <div class="shop-list-box-message">
+          <div class="shop-list-box-name">{{item.name}}</div>
+          <div class="shop-list-box-color">
+            <span>黑色</span>
+          </div>
+          <div class="shop-list-box-color">
+            <span>满2件8折</span>
+          </div>
+          <div class="shop-list-box-price">
+            <div class="shop-list-box-price-left">
+              <span class="shop-list-box-price-size">￥</span>
+              <span class="shop-list-box-price-num">{{item.price}}</span>
+              <span class="shop-list-box-price-size">.00</span>
+            </div>
+            <div class="shop-list-box-price-right">
+              <span class="minus" @click="item.num--"></span>
+              <div>
+                <input type="tel" v-model="item.num" />
+              </div>
+              <span class="plus" @click="item.num++"></span>
+            </div>
+          </div>
+          <div class="shop-list-box-del">
+            <span class="shop-list-box-del-move">移入关注</span>
+            <span class="shop-list-box-delete" @click="remove(index)">删除</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty_cart" v-if="isDispaly">
       <div class="shopcart_empty_wrap" v-for="item in middlecontent" :key="item.active">
         <div class="cart_empty">
           <img :src="item.img" />
@@ -104,6 +78,7 @@
             <div class="oprice"></div>
           </div>
         </div>
+
         <div class="empty_cart_coupon">
           <div class="mod_coupon_head">
             <div class="mod_coupon_title">
@@ -157,6 +132,51 @@
         </ul>
       </div>
     </div>
+
+    <div class="shop-total" v-if="isAble">
+        <div class="shop-total-left">
+            <input type="checkbox" class="shop-list-input" @change="isChange" v-model="isAllchecked" />
+            <span>全选</span>
+        </div>
+        <div class="shop-total-price-allNum">
+            <span class="shop-total-price-all">总计:</span>
+            <span class="shop-total-price-num">￥</span>
+            <span>{{prices()}}</span>
+        </div>
+        <div class="shop-total-toBuy">
+            去结算(<span>{{nums()}}</span>件)
+        </div>
+    </div>
+    <div class="float">
+      <router-link to="/">
+        <div class="floatImg">
+          <!-- <img src="../assets/homeq.png" v-if="indexItem==0" /> -->
+          <img src="../assets/home.png" />
+        </div>
+      </router-link>
+      <router-link to="/classify">
+        <div class="floatImg">
+          <!-- <img src="../assets/classfiyq.png" v-if="indexItem==1" /> -->
+          <img src="../assets/classfiy.png" />
+        </div>
+      </router-link>
+      <div class="floatImg">
+        <a href="https://wq.jd.com/mcoss/wxmall/home?ptype=2&ptag=138097.1.6&sceneval=2&fromM=1">
+          <img src="../assets/jinxi.png" />
+        </a>
+      </div>
+
+      <div class="floatImg">
+        <!-- <img src="../assets/shopcarq.png" v-if="indexItem==3" /> -->
+        <img src="../assets/shopcarq.png" />
+      </div>
+
+      <router-link to="/enter">
+        <div class="floatImg">
+          <img src="../assets/enter.png" />
+        </div>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -181,30 +201,71 @@ export default {
       goods: [],
       bottomtext: "",
       newprice: "",
-      blacknav: false,
-      carttop:false
+      isAllchecked:false,
+      checkGroup:[],
+      ckecked:true,
     };
   },
-  methods: {
-    goback() {
-      this.$router.go(-1);
+  computed: {
+    list() {
+      return this.$store.state.shopList;
     },
-    gocart(){
-        this.carttop=true
+    // message() {
+    //   return this.$store.state.message;
+    // },
+    isDispaly() {
+      return this.$store.state.isDispaly;
     },
-    blackclick() {
-      if (this.blacknav == false) {
-        this.blacknav = true;
-      } else if (this.blacknav == true) {
-        this.blacknav = false;
-      }
+    isAble() {
+      return this.$store.state.isAble;
     },
+    
   },
-    mounted(){
-    let that = this;
-    window.onscroll = function (){
-        that.blacknav=false
-    } 
+    methods:{
+        prices(){
+            var sum = 0;
+            for(let i in this.checkGroup){
+                sum += this.checkGroup[i].price*this.checkGroup[i].num;
+                // console.log(this.checkGroup[i].price)
+            }
+            return sum;
+        },
+        nums(){
+            var sum = 0;
+            for(let i in this.checkGroup){
+                sum +=this.checkGroup[i].num;
+                // console.log(this.checkGroup[i].price)
+            }
+            return sum;
+        },
+        isChange(){
+            // if(this.isAllchecked){
+            //     this.checkGroup = this.list;
+            // };
+            if(!this.isAllchecked){
+                this.checkGroup = [];
+            }else{
+                this.checkGroup = this.list;
+            }
+        },
+        handLiChange(){
+            if(this.checkGroup.length == this.list.length){
+                this.isAllchecked = true;
+                // console.log(this.list)
+            }else{
+                this.isAllchecked = false
+            }
+        },
+        remove(index){
+            this.$store.commit("removeList",index)
+        //    console.log(this.checkGroup)
+        // console.log(index)
+        if(this.checkGroup.length==0){
+            this.$store.state.isDispaly=true 
+             this.checkGroup = [];
+            this.$store.state.isAble=false 
+        }
+    }
     },
   created() {
     let that = this;
@@ -213,7 +274,7 @@ export default {
       .get(url)
       .then(function (response) {
         if (response.status == 200) {
-          console.log(response);
+        //   console.log(response);
 
           that.topcontent = response.data.topcontent;
           that.register = response.data.register;
@@ -244,6 +305,226 @@ export default {
 </script>
 
 <style scoped>
+.shop-total-price-allNum{
+    margin-left: 50px;
+}
+.shop-total-toBuy{
+    margin: 6px 12px 0;
+    font-weight: 700;
+    display: block;
+    width: 113px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    font-size: 13px;
+    border-radius: 20px;
+    background-color: #f2270c;
+    color: #fff;
+    /* font-size: .7rem; */
+    background-image: linear-gradient(135deg,#f2140c,#f2270c 70%,#f24d0c);
+}
+.shop-total-price-all{
+    font-size: 15px;
+}
+.shop-total-price-num{
+    font-size: 15px;
+    font-weight: 600;
+}
+.shop-total-left{
+    display: flex;
+    align-items: center;
+}
+.shop-total-left span{
+    margin-left: -20px;
+    font-size: 12px;
+}
+.shop-total{
+    width: 100%;
+    position: fixed;
+    bottom: 46px;
+    height: 50px;
+    background: hsla(0,0%,100%,.95);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.shop-list-box-delete {
+  position: relative;
+  padding: 0 10px;
+  line-height: 15px;
+  font-size: 10px;
+}
+.shop-list-box-del-move {
+  position: relative;
+  padding: 0 10px;
+  line-height: 15px;
+}
+.shop-list-box-del-move::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  background-color: #262626;
+  width: 1px;
+  /* top: 0;
+    bottom: 0; */
+  right: 0;
+  top: 2px;
+  bottom: 2px;
+}
+.shop-list-box-del {
+  margin: 10px 0 0;
+  height: 15px;
+  font-size: 10px;
+  text-align: right;
+}
+.minus {
+  position: relative;
+  width: 0.75rem;
+  height: 0.75rem;
+}
+.minus::before {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeAgMAAABGXkYxAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJUExURUdwTCQkJCYmJrxUw5UAAAACdFJOUwB9WCfAuQAAAB1JREFUGNNjYBgIwLZq1aoJIAYXkLEAhQGXGggAAJHVCnlOtZ+AAAAAAElFTkSuQmCC)
+    no-repeat 50%;
+  background-size: 0.75rem 0.75rem;
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: -14px;
+  width: 0.75rem;
+  height: 0.75rem;
+}
+.plus {
+  position: relative;
+  width: 0.75rem;
+  height: 0.75rem;
+}
+.plus::before {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeAgMAAABGXkYxAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJUExURSUlJUdwTCQkJK/0gvAAAAADdFJOU/8AfWpa/bIAAAArSURBVBjTYwiFgAAG8hkRqlBGACvxjAYGBiYwgwEIUBlwKZIMRDiDfO8AAJNQRyMPYU0tAAAAAElFTkSuQmCC)
+    no-repeat 50%;
+  background-size: 0.75rem 0.75rem;
+  content: "";
+  position: absolute;
+  top: -13px;
+  left: 33px;
+  width: 0.75rem;
+  height: 0.75rem;
+}
+.shop-list-box-price-right {
+  position: relative;
+  display: block;
+  width: 3.3rem;
+  border-radius: 2px;
+  /* overflow: hidden; */
+  background-color: #fff;
+  font-weight: 400;
+}
+.shop-list-box-price-right input {
+  border: none;
+  width: 1.8rem;
+  text-align: center;
+  color: #262626;
+  background-color: #f2f2f2;
+  font-size: 0.55rem;
+}
+.shop-list-box-price-right input::before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 100%;
+  margin-top: 1px;
+}
+.shop-list-box-price-num {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.shop-list-box-price-left {
+  flex: 1;
+  line-height: 0.8rem;
+  color: #f2270c;
+  font-size: 0.6rem;
+}
+.shop-list-box-price {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px;
+}
+.shop-list-box-color {
+  margin: 0.3rem 0 0;
+  font-size: 0.5rem;
+  display: flex;
+  flex: 0 1 auto;
+}
+.shop-list-box-color span {
+  position: relative;
+  background: #f2f2f2;
+  padding: 0 0.75rem 0 0.3rem;
+  height: 0.8rem;
+  line-height: 0.8rem;
+  font-size: 0.5rem;
+  color: #262626;
+  border-radius: 0.4rem;
+}
+.shop-list-box-color span::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0.25rem;
+  margin-top: -3px;
+  background-image: url(//wq.360buyimg.com/wxsq_trade/cart/main/images/sprite.img_default_437_16ed632a.png);
+  background-position: -117px -85px;
+  background-size: 130px 105px;
+  width: 6px;
+  height: 6px;
+}
+.shop-list-box-name {
+  font-size: 0.6rem;
+  margin-bottom: 0.3rem;
+  word-break: break-all;
+}
+.shop-list-input {
+  width: 50px;
+  margin: 0 10px 0 0;
+}
+.shop-list-box {
+  padding: 0.6rem 0 1px;
+  border-radius: 0.5rem;
+  background: #fff;
+  color: #262626;
+  margin-top: 0.6rem;
+}
+.shop-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 0.9rem;
+  padding: 10px;
+}
+.shop-list-img {
+  width: 200px;
+  /* width: 5rem; */
+  /* height: 5rem; */
+  overflow: hidden;
+  box-shadow: 0 0.2rem 0.6rem 0 rgba(0, 0, 0, 0.05);
+  border-radius: 0.3rem;
+  margin-right: 15px;
+}
+.shop-list-img img {
+  width: 100%;
+}
+
+.pagecart {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  overflow: hidden scroll;
+  background-color: rbg(242, 242, 242);
+}
 
 
 .good-black-nav-detail {
@@ -451,9 +732,6 @@ export default {
 
 .mall_seckill_countdown {
   display: flex;
-}
-.carttop1{
-    display: none;
 }
 
 .countdown_detail {
