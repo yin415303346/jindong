@@ -1,12 +1,81 @@
 <template>
   <div class="pagecart">
+    <div class="shop-back">
+      <div @click="topback()">
+        <img src="../assets/左标.png" />
+      </div>
+      <div>购物车</div>
+      <div @click="shopclick()">
+        <img src="../assets/更多.png" />
+      </div>
+    </div>
+    <!-- 1 -->
+    <div class="good-black-nav" :class="{activeBlack2:blacknav==true}">
+      <router-link to="/" style="color:white">
+        <div class="good-black-nav-detail">
+          <span class="good-black-nav-detail-span1">
+            <img src="../assets/房屋管理.png" alt />
+          </span>
+          <span class="good-black-nav-detail-span2">首页</span>
+        </div>
+      </router-link>
+      <router-link to="/classify" style="color:white">
+        <div class="good-black-nav-detail">
+          <span class="good-black-nav-detail-span1">
+            <img src="../assets/搜索.png" alt />
+          </span>
+          <span class="good-black-nav-detail-span2">分类搜索</span>
+        </div>
+      </router-link>
+      <router-link to="/mine" style="color:white">
+        <div class="good-black-nav-detail">
+          <span class="good-black-nav-detail-span1">
+            <img src="../assets/我.png" alt />
+          </span>
+          <span class="good-black-nav-detail-span2">我的京东</span>
+        </div>
+      </router-link>
+      <router-link to="/" style="color:white">
+        <div class="good-black-nav-detail">
+          <span class="good-black-nav-detail-span1">
+            <img src="../assets/足迹.png" alt />
+          </span>
+          <span class="good-black-nav-detail-span2">浏览记录</span>
+        </div>
+      </router-link>
+      <router-link to="/" style="color:white">
+        <div class="good-black-nav-detail">
+          <span class="good-black-nav-detail-span1">
+            <img src="../assets/心 爱心.png" alt />
+          </span>
+          <span class="good-black-nav-detail-span2">我的关注</span>
+        </div>
+      </router-link>
+      <router-link to="/" style="color:white">
+        <div class="good-black-nav-detail">
+          <span class="good-black-nav-detail-span1">
+            <img src="../assets/分享.png" alt />
+          </span>
+          <span class="good-black-nav-detail-span3">分享</span>
+        </div>
+      </router-link>
+      <div class="good-black-nav-css"></div>
+    </div>
+    <!-- 2 -->
     <div class="carttop" v-if="isDispaly">
       <div class="topbar">{{topcontent}}</div>
       <button class="btntop">{{register}}</button>
     </div>
     <div class="shop-list-box">
       <div class="shop-list" v-for="(item,index) in list" :key="item.id">
-        <input type="checkbox" class="shop-list-input" v-model="checkGroup" :value="item" @change="handLiChange" checked/>
+        <input
+          type="checkbox"
+          class="shop-list-input"
+          v-model="checkGroup"
+          :value="item"
+          @change="handLiChange"
+          checked
+        />
         <div class="shop-list-img">
           <img :src="item.img" alt />
         </div>
@@ -61,39 +130,45 @@
           <!-- 倒计时 -->
           <div class="mall_seckill_countdown">
             <span class="time">{{item.flashtime}}</span>
-            <div class="countdown_detail">{{item.countdown}}</div>
+            <div class="countdown_detail">{{countdown1}}</div>
           </div>
           <div class="mall_seckill_link">
             <img :src="item.flashimg" />
           </div>
         </div>
         <!-- 滑动图片 -->
-        <div class="mall_seckill_slider" v-for="item in products" :key="item.aspectj">
-          <div class="mall_seckill_item">
+        <div class="mall_seckill_slider">
+          <div class="mall_seckill_item" v-for="item in products" :key="item.aspect">
             <div class="mall_seckill_image">
               <img :src="item.img" class="image" />
-              <p class="mall_seckill_price">{{item.newprice}}</p>
             </div>
-            <div class="nprice"></div>
-            <div class="oprice"></div>
+            <p class="mall_seckill_price">
+              {{item.newprice}}
+              <span class="del">{{item.oldprice}}</span>
+            </p>
+          </div>
+          <div class="mall_seckill_item type_more">
+            <div class="btn">
+              <i class="inner">{{btnright}}</i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty_cart_coupon">
+        <div class="mod_coupon_head">
+          <div class="mod_coupon_title">
+            <img :src="imgleft" />
+            <span>{{benefits}}</span>
+            <img :src="imgright" />
+          </div>
+          <div class="mod_coupon_get">
+            <span>{{btntext}}</span>
           </div>
         </div>
 
-        <div class="empty_cart_coupon">
-          <div class="mod_coupon_head">
-            <div class="mod_coupon_title">
-              <img :src="imgleft" />
-              <span>{{benefits}}</span>
-              <img :src="imgright" />
-            </div>
-            <div class="mod_coupon_get">
-              <span>{{btntext}}</span>
-            </div>
-          </div>
-
-          <div class="mod_coupon_area">
-            <img :src="coupon" />
-          </div>
+        <div class="mod_coupon_area">
+          <img :src="coupon" />
         </div>
       </div>
     </div>
@@ -134,18 +209,19 @@
     </div>
 
     <div class="shop-total" v-if="isAble">
-        <div class="shop-total-left">
-            <input type="checkbox" class="shop-list-input" @change="isChange" v-model="isAllchecked" />
-            <span>全选</span>
-        </div>
-        <div class="shop-total-price-allNum">
-            <span class="shop-total-price-all">总计:</span>
-            <span class="shop-total-price-num">￥</span>
-            <span>{{prices()}}</span>
-        </div>
-        <div class="shop-total-toBuy">
-            去结算(<span>{{nums()}}</span>件)
-        </div>
+      <div class="shop-total-left">
+        <input type="checkbox" class="shop-list-input" @change="isChange" v-model="isAllchecked" />
+        <span>全选</span>
+      </div>
+      <div class="shop-total-price-allNum">
+        <span class="shop-total-price-all">总计:</span>
+        <span class="shop-total-price-num">￥</span>
+        <span>{{prices()}}</span>
+      </div>
+      <div class="shop-total-toBuy">
+        去结算(
+        <span>{{nums()}}</span>件)
+      </div>
     </div>
     <div class="float">
       <router-link to="/">
@@ -186,24 +262,34 @@ import axios from "axios";
 export default {
   data() {
     return {
+      blacknav: false,
+      countdown1: "00:00:00",
       topcontent: "",
       register: "",
       item: "",
       desc: "",
       middlecontent: [],
       middletext: "",
-      flashtitle: "",
       flashsale: [],
-      flashtime: "",
-      countdown: "",
-      flashimg: "",
       imgleft: "",
       goods: [],
+      benefits: "",
+      imgright: "",
+      btntext: "",
+      coupon: "",
       bottomtext: "",
-      newprice: "",
-      isAllchecked:false,
-      checkGroup:[],
-      ckecked:true,
+      products: [],
+      btnright: "",
+      isAllchecked: false,
+      checkGroup: [],
+      ckecked: true,
+    };
+  },
+ mounted() {
+    this.countDown();
+    let that = this;
+    window.onscroll = function () {
+      that.blacknav = false;
     };
   },
   computed: {
@@ -219,54 +305,77 @@ export default {
     isAble() {
       return this.$store.state.isAble;
     },
-    
   },
-    methods:{
-        prices(){
-            var sum = 0;
-            for(let i in this.checkGroup){
-                sum += this.checkGroup[i].price*this.checkGroup[i].num;
-                // console.log(this.checkGroup[i].price)
-            }
-            return sum;
-        },
-        nums(){
-            var sum = 0;
-            for(let i in this.checkGroup){
-                sum +=this.checkGroup[i].num;
-                // console.log(this.checkGroup[i].price)
-            }
-            return sum;
-        },
-        isChange(){
-            // if(this.isAllchecked){
-            //     this.checkGroup = this.list;
-            // };
-            if(!this.isAllchecked){
-                this.checkGroup = [];
-            }else{
-                this.checkGroup = this.list;
-            }
-        },
-        handLiChange(){
-            if(this.checkGroup.length == this.list.length){
-                this.isAllchecked = true;
-                // console.log(this.list)
-            }else{
-                this.isAllchecked = false
-            }
-        },
-        remove(index){
-            this.$store.commit("removeList",index)
-        //    console.log(this.checkGroup)
-        // console.log(index)
-        if(this.checkGroup.length==0){
-            this.$store.state.isDispaly=true 
-             this.checkGroup = [];
-            this.$store.state.isAble=false 
-        }
-    }
+  methods: {
+    topback() {
+      this.$router.go(-1);
     },
+    shopclick() {
+      if (this.blacknav == false) {
+        this.blacknav = true;
+      } else if (this.blacknav == true) {
+        this.blacknav = false;
+      }
+    },
+    prices() {
+      var sum = 0;
+      for (let i in this.checkGroup) {
+        sum += this.checkGroup[i].price * this.checkGroup[i].num;
+        // console.log(this.checkGroup[i].price)
+      }
+      return sum;
+    },
+    nums() {
+      var sum = 0;
+      for (let i in this.checkGroup) {
+        sum += this.checkGroup[i].num;
+        // console.log(this.checkGroup[i].price)
+      }
+      return sum;
+    },
+    isChange() {
+      // if(this.isAllchecked){
+      //     this.checkGroup = this.list;
+      // };
+      if (!this.isAllchecked) {
+        this.checkGroup = [];
+      } else {
+        this.checkGroup = this.list;
+      }
+    },
+    handLiChange() {
+      if (this.checkGroup.length == this.list.length) {
+        this.isAllchecked = true;
+        console.log(this.checkGroup);
+        // console.log(this.list)
+      } else {
+        this.isAllchecked = false;
+      }
+    },
+    countDown() {
+      setInterval(() => {
+        let nowTime = new Date();
+        let inputTime = new Date("2020-9-1 00:00:00");
+        let times = (inputTime - nowTime) / 1000;
+        let h = parseInt((times / 60 / 60) % 24);
+        h = h < 10 ? "0" + h : h;
+        let m = parseInt((times / 60) % 60);
+        m = m < 10 ? "0" + m : m;
+        let s = parseInt(times % 60);
+        s = s < 10 ? "0" + s : s;
+        this.countdown1 = h + ":" + m + ":" + s;
+      }, 1000);
+    },
+    remove(index) {
+      this.$store.commit("removeList", index);
+      //    console.log(this.checkGroup)
+      // console.log(index)
+      if (this.checkGroup.length == 0) {
+        this.$store.state.isDispaly = true;
+        this.$store.state.isAble = false;
+      }
+    },
+  },
   created() {
     let that = this;
     let url = "http://127.0.0.1:5500/src/data/cart.json";
@@ -274,17 +383,11 @@ export default {
       .get(url)
       .then(function (response) {
         if (response.status == 200) {
-        //   console.log(response);
-
           that.topcontent = response.data.topcontent;
           that.register = response.data.register;
           that.middlecontent = response.data.middlecontent;
           that.middletext = response.data.middletext;
-          that.flashtitle = response.data.flashtitle;
           that.flashsale = response.data.flashsale;
-          that.flashtime = response.data.flashtime;
-          that.countdown = response.data.countdown;
-          that.flashimg = response.data.flashimg;
           that.imgleft = response.data.imgleft;
           that.benefits = response.data.benefits;
           that.imgright = response.data.imgright;
@@ -294,60 +397,66 @@ export default {
           that.goods = response.data.goods;
           that.desc = response.data.desc;
           that.products = response.data.products;
-          that.item.newprice = response.data.item.newprice;
+          that.btnright = response.data.btnright;
         }
       })
       .catch(function (error) {
         console.log(error);
       });
   },
+
+ 
 };
 </script>
 
 <style scoped>
-.shop-total-price-allNum{
-    margin-left: 50px;
+.good-back img {
+  width: 2rem;
+  margin: 0 1rem;
 }
-.shop-total-toBuy{
-    margin: 6px 12px 0;
-    font-weight: 700;
-    display: block;
-    width: 113px;
-    height: 38px;
-    line-height: 38px;
-    text-align: center;
-    font-size: 13px;
-    border-radius: 20px;
-    background-color: #f2270c;
-    color: #fff;
-    /* font-size: .7rem; */
-    background-image: linear-gradient(135deg,#f2140c,#f2270c 70%,#f24d0c);
+.shop-total-price-allNum {
+  margin-left: 50px;
 }
-.shop-total-price-all{
-    font-size: 15px;
+.shop-total-toBuy {
+  margin: 6px 12px 0;
+  font-weight: 700;
+  display: block;
+  width: 113px;
+  height: 38px;
+  line-height: 38px;
+  text-align: center;
+  font-size: 13px;
+  border-radius: 20px;
+  background-color: #f2270c;
+  color: #fff;
+  /* font-size: .7rem; */
+  background-image: linear-gradient(135deg, #f2140c, #f2270c 70%, #f24d0c);
 }
-.shop-total-price-num{
-    font-size: 15px;
-    font-weight: 600;
+.shop-total-price-all {
+  font-size: 15px;
 }
-.shop-total-left{
-    display: flex;
-    align-items: center;
+.shop-total-price-num {
+  font-size: 15px;
+  font-weight: 600;
 }
-.shop-total-left span{
-    margin-left: -20px;
-    font-size: 12px;
+.shop-total-left {
+  display: flex;
+  align-items: center;
 }
-.shop-total{
-    width: 100%;
-    position: fixed;
-    bottom: 46px;
-    height: 50px;
-    background: hsla(0,0%,100%,.95);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+.shop-total-left span {
+  margin-left: -20px;
+  font-size: 12px;
+}
+.shop-total {
+  width: 100%;
+  position: fixed;
+  bottom: 46px;
+  height: 50px;
+  background: hsla(0, 0%, 100%, 0.95);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 .shop-list-box-delete {
   position: relative;
@@ -492,8 +601,8 @@ export default {
   margin: 0 10px 0 0;
 }
 .shop-list-box {
-  padding: 0.6rem 0 1px;
-  border-radius: 0.5rem;
+  /* padding: 0.6rem 0 1px;
+  border-radius: 0.5rem; */
   background: #fff;
   color: #262626;
   margin-top: 0.6rem;
@@ -523,9 +632,8 @@ export default {
   height: 100%;
   overflow-y: scroll;
   overflow: hidden scroll;
-  background-color: rbg(242, 242, 242);
+  background-color: rgb(242, 242, 242);
 }
-
 
 .good-black-nav-detail {
   display: flex;
@@ -590,9 +698,8 @@ export default {
 .shop-back img {
   width: 2rem;
 }
-.activeBlack {
-  display: block;
-}
+
+
 .carttop {
   border-top: 1px solid rgb(242, 242, 242);
   text-align: center;
@@ -606,6 +713,7 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  /* margin-top: 50px; */
 }
 
 .btntop {
@@ -709,6 +817,7 @@ export default {
   flex-direction: row;
   height: 45px;
   line-height: 45px;
+  justify-content: space-between;
 }
 
 .mall_seckill {
@@ -740,6 +849,11 @@ export default {
   font-size: 12px;
   margin-left: 12px;
   margin-right: 114px;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  display: flex;
+  flex-flow: row;
+  color: red;
 }
 
 .mall_seckill_link img {
@@ -757,6 +871,7 @@ export default {
   height: 0;
   overflow: hidden;
   padding-top: 100%;
+  display: flex;
 }
 
 .mall_seckill_image .image {
@@ -768,9 +883,121 @@ export default {
   border-radius: 4px;
 }
 
+.mall_seckill_slider {
+  position: relative;
+  padding: 0 15px 15px;
+  font-size: 0;
+  font-family: none;
+  white-space: nowrap;
+  overflow: auto;
+  overflow-x: auto;
+  white-space: nowrap;
+  width: 100%;
+  margin-top: 2%;
+  flex-wrap: nowrap;
+}
+
+.mall_seckill_slider::-webkit-scrollbar {
+  display: none;
+}
+
 .mall_seckill_slider .mall_seckill_item {
   display: inline-block;
   vertical-align: top;
+}
+
+.mall_seckill_item {
+  position: relative;
+  text-align: center;
+  width: 24%;
+  margin-right: 10px;
+  padding: 0 5px 5px;
+  border-radius: 4px;
+  height: 100px;
+  width: 80%;
+  margin-left: 2%;
+  display: flex;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.mall_seckill_image {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  padding-top: 100%;
+}
+
+.mall_seckill_price {
+  font-size: 16px;
+  margin-top: 5px;
+  color: #f2270c;
+  z-index: 11;
+}
+
+.mall_seckill_price .del {
+  display: block;
+  font-size: 12px;
+  color: #ccc;
+  line-height: 1;
+  text-decoration: line-through;
+}
+
+.mall_seckill_item.type_more {
+  position: absolute;
+  width: 55px;
+  height: 100%;
+  bottom: 20px;
+  padding: 0;
+}
+
+.mall_seckill_slider .mall_seckill_item {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.mall_seckill_item.type_more .btn {
+  display: block;
+  width: 43px;
+  position: absolute;
+  height: 107%;
+  right: 10px;
+  background-color: #f7f7f7;
+}
+
+.mall_seckill_item.type_more .btn .inner {
+  font-size: 12px;
+  color: #999;
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  margin-top: -25px;
+  padding-bottom: 12px;
+  -webkit-writing-mode: vertical-rl;
+  writing-mode: vertical-rl;
+  text-align: left;
+  letter-spacing: 2px;
+}
+
+em,
+i {
+  font-style: normal;
+}
+
+.mall_seckill_item.type_more .btn .inner:after {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: -2px;
+  width: 6px;
+  height: 10px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 20'%3E%3Cpath fill='%23CCC' fill-rule='evenodd' d='M2 20c-.8 0-1.5-.5-1.8-1.2-.3-.8-.2-1.6.4-2.2L7.2 10 .6 3.4c-.8-.8-.8-2 0-2.8.8-.8 2-.8 2.8 0l8 8c.4.4.6 1 .6 1.4 0 .5-.2 1-.6 1.4l-8 8c-.4.4-1 .6-1.4.6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  margin-left: -1px;
 }
 
 .mall_seckill_item {
@@ -949,5 +1176,12 @@ img {
 
 .list {
   list-style: none;
+}
+
+.price em {
+  font-size: 16px;
+}
+.activeBlack2{
+  display: block;
 }
 </style>

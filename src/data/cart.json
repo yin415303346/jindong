@@ -13,7 +13,7 @@
     "flashsale":[
         {
             "flashtitle":"京东秒杀",
-            "flashtime":"具体时间点场",
+            "flashtime":"24点场",
             "countdown":"00:00:00",
             "flashimg":"http://127.0.0.1:5500/src/assets/branch1/g-a0.png"
         }
@@ -46,6 +46,26 @@
         },
         {
             "img":"http://127.0.0.1:5500/src/assets/cart/g-c-1.jpg",
+            "newprice":"￥2099.00",
+            "oldprice":"￥2499.00"
+        },
+        {
+            "img":"http://127.0.0.1:5500/src/assets/cart/g-c-2.jpg",
+            "newprice":"￥2099.00",
+            "oldprice":"￥2499.00"
+        },
+        {
+            "img":"http://127.0.0.1:5500/src/assets/cart/g-c-3.jpg",
+            "newprice":"￥2099.00",
+            "oldprice":"￥2499.00"
+        },
+        {
+            "img":"http://127.0.0.1:5500/src/assets/cart/g-c-4.jpg",
+            "newprice":"￥2099.00",
+            "oldprice":"￥2499.00"
+        },
+        {
+            "img":"http://127.0.0.1:5500/src/assets/cart/g-c-5.jpg",
             "newprice":"￥2099.00",
             "oldprice":"￥2499.00"
         }
