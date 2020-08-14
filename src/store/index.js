@@ -10,14 +10,14 @@ const store= new Vuex.Store({
     },
     mutations:{
         add(state,list){
-            console.log(list.introduce)
-            console.log(state.shopList)
+            // console.log(list.introduce)
+            // console.log(state.shopList)
             // list.num++
             let index = true;
             for (let i = 0; i < state.shopList.length; i++) {
                 if (list.newprice == state.shopList[i].price) {
                     state.shopList[i].num++;
-                    console.log(111)
+                    // console.log(111)
                     index = false
                 }
             }

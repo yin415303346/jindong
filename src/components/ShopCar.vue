@@ -321,7 +321,6 @@ export default {
       var sum = 0;
       for (let i in this.checkGroup) {
         sum += this.checkGroup[i].price * this.checkGroup[i].num;
-        // console.log(this.checkGroup[i].price)
       }
       return sum;
     },
@@ -329,14 +328,10 @@ export default {
       var sum = 0;
       for (let i in this.checkGroup) {
         sum += this.checkGroup[i].num;
-        // console.log(this.checkGroup[i].price)
       }
       return sum;
     },
     isChange() {
-      // if(this.isAllchecked){
-      //     this.checkGroup = this.list;
-      // };
       if (!this.isAllchecked) {
         this.checkGroup = [];
       } else {
@@ -346,8 +341,6 @@ export default {
     handLiChange() {
       if (this.checkGroup.length == this.list.length) {
         this.isAllchecked = true;
-        console.log(this.checkGroup);
-        // console.log(this.list)
       } else {
         this.isAllchecked = false;
       }
@@ -368,9 +361,8 @@ export default {
     },
     remove(index) {
       this.$store.commit("removeList", index);
-      //    console.log(this.checkGroup)
-      // console.log(index)
-      if (this.checkGroup.length == 0) {
+      this.checkGroup = this.list;
+      if (this.list.length == 0) {
         this.$store.state.isDispaly = true;
         this.$store.state.isAble = false;
       }
